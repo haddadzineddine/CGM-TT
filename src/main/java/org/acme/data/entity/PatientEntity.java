@@ -6,7 +6,9 @@ import org.hibernate.annotations.UuidGenerator;
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import lombok.Data;
 
+@Data
 @Entity(name = "patients")
 public class PatientEntity {
 
@@ -17,9 +19,12 @@ public class PatientEntity {
     @Column(nullable = false)
     private String name;
 
-    @Column(name = "birth_date")
-    protected LocalDate birthDate;
-
     @Column(nullable = false)
+    private String surname;
+
+    @Column(name = "birth_date")
+    private LocalDate birthDate;
+
+    @Column(name = "social_security_number", nullable = false)
     private String socialSecurityNumber;
 }

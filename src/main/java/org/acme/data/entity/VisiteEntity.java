@@ -2,10 +2,8 @@ package org.acme.data.entity;
 
 import java.time.LocalDate;
 import java.util.UUID;
-
 import org.acme.core.enumeration.VisiteType;
 import org.hibernate.annotations.UuidGenerator;
-
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.EnumType;
@@ -13,8 +11,11 @@ import jakarta.persistence.Enumerated;
 import jakarta.persistence.FetchType;
 import jakarta.persistence.Id;
 import jakarta.persistence.ManyToOne;
+import lombok.Data;
 
-@Entity
+
+@Data
+@Entity(name = "visites")
 public class VisiteEntity {
     @Id
     @UuidGenerator
@@ -24,7 +25,7 @@ public class VisiteEntity {
     private PatientEntity patient;
 
     @Column(name = "visite_date")
-    protected LocalDate visiteDate;
+    private LocalDate visiteDate;
 
     @Enumerated(EnumType.STRING)
     private VisiteType type;
@@ -32,6 +33,6 @@ public class VisiteEntity {
     @Column(nullable = false)
     private String reason;
 
-    @Column(nullable = true)
+    @Column(name = "family_history", nullable = true)
     private String familyHistory;
 }

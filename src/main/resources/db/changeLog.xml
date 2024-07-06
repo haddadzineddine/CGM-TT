@@ -1,0 +1,57 @@
+<?xml version="1.1" encoding="UTF-8" standalone="no"?>
+<databaseChangeLog xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+    xmlns:ext="http://www.liquibase.org/xml/ns/dbchangelog-ext"
+    xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+    xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog-ext https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-ext.xsd
+                        http://www.liquibase.org/xml/ns/dbchangelog https://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-latest.xsd">
+
+    <changeSet author="zineddine" id="1">
+        <createTable tableName="patients">
+            <column name="uuid" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="patients_pkey" />
+            </column>
+            <column name="name" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="surname" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="birth_date" type="date">
+                <constraints nullable="false" />
+            </column>
+            <column name="social_security_number" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <sql>CREATE TYPE visite_type AS ENUM ('AT_HOME','AT_OFFICE')</sql>
+
+        <createTable tableName="visites">
+            <column name="uuid" type="UUID">
+                <constraints nullable="false" primaryKey="true" primaryKeyName="visites_pkey" />
+            </column>
+            <column name="visite_date" type="date">
+                <constraints nullable="false" />
+            </column>
+            <column name="reason" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="family_history" type="VARCHAR(255)">
+                <constraints nullable="false" />
+            </column>
+            <column name="type" type="visite_type">
+                <constraints nullable="false" />
+            </column>
+
+            <column name="patient_uuid" type="UUID">
+                <constraints nullable="false" />
+            </column>
+        </createTable>
+
+        <addForeignKeyConstraint baseColumnNames="patient_uuid" baseTableName="visites"
+            constraintName="visite_patient_fkey" deferrable="false"
+            initiallyDeferred="false" onDelete="NO ACTION" onUpdate="NO ACTION"
+            referencedColumnNames="uuid" referencedTableName="patients" validate="true" />
+
+    </changeSet>
+</databaseChangeLog>
