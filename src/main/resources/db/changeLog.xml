@@ -54,4 +54,25 @@
             referencedColumnNames="uuid" referencedTableName="patients" validate="true" />
 
     </changeSet>
+
+
+    <changeSet author="zineddine" id="2" context="!production">
+        <sqlFile dbms="postgresql"
+            encoding="UTF-8"
+            endDelimiter=";"
+            path="sql/patient.sql"
+            relativeToChangelogFile="false"
+            splitStatements="true"
+            stripComments="true" />
+
+
+            <sqlFile dbms="postgresql"
+            encoding="UTF-8"
+            endDelimiter=";"
+            path="sql/visite.sql"
+            relativeToChangelogFile="false"
+            splitStatements="true"
+            stripComments="true" />
+
+    </changeSet>
 </databaseChangeLog>
